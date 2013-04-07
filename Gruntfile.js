@@ -30,21 +30,17 @@ module.exports = function (grunt) {
 
         // Configuration to be run (and then tested).
         kmc: {
-            default_options: {
+            index: {
                 options: {
+                    packages: [{
+                        name: 'assets',
+                        path: 'test/'
+                    }]
                 },
-                files: {
-                    'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-                }
-            },
-            custom_options: {
-                options: {
-                    separator: ': ',
-                    punctuation: ' !!!'
-                },
-                files: {
-                    'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
-                }
+                files: [{
+                    src: 'test/assets/index.js',
+                    dest: 'test/assets/index.combo.js'
+                }]
             }
         },
 
@@ -65,7 +61,8 @@ module.exports = function (grunt) {
 
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
-    grunt.registerTask('test', ['clean', 'kmc', 'nodeunit']);
+//    grunt.registerTask('test', ['clean', 'kmc', 'nodeunit']);
+    grunt.registerTask('test', ['clean', 'kmc']);
 
     // By default, lint and run all tests.
     grunt.registerTask('default', ['jshint', 'test']);

@@ -1,0 +1,37 @@
+/*
+combined files : 
+
+assets/mods/mod1
+assets/index
+
+*/
+/**
+ * mod1
+ * @author: daxingplay<daxingplay@gmail.com>
+ * @date: 13-4-7
+ * @requires: kissy 1.2+
+ */
+KISSY.add('assets/mods/mod1',function (S) {
+    return {
+        init: function () {
+            S.log('test');
+        }
+    }
+});
+/**
+ * index
+ * @author: ��Ӣ��daxingplay��<daxingplay@gmail.com>
+ * @date: 13-4-7
+ * @requires: kissy 1.2+
+ */
+KISSY.add('assets/index',function (S) {
+    return {
+        init: function () {
+            S.log('inited.');
+        }
+    }
+}, {
+    requires: [
+        './mods/mod1'
+    ]
+});

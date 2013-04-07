@@ -1,0 +1,17 @@
+/**
+ * index
+ * @author: ×ÏÓ¢£¨daxingplay£©<daxingplay@gmail.com>
+ * @date: 13-4-7
+ * @requires: kissy 1.2+
+ */
+KISSY.add(function (S) {
+    return {
+        init: function () {
+            S.log('inited.');
+        }
+    }
+}, {
+    requires: [
+        './mods/mod1'
+    ]
+});
