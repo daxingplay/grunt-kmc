@@ -1,6 +1,7 @@
 'use strict';
 
-var grunt = require('grunt');
+var grunt = require('grunt'),
+    os = require('os');
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -35,7 +36,7 @@ exports.kmc = {
         test.expect(1);
 
         var actual = grunt.file.read('test/assets/index.combo.js', 'utf-8');
-        var expected = grunt.file.read('test/expected/index.combo.js', 'utf-8');
+        var expected = grunt.file.read('test/expected/index.combo.js', 'utf-8').replace("\r\n", os.EOL);
         test.equal(actual, expected, 'should build proper combo file.');
 
         test.done();
