@@ -1,5 +1,7 @@
 # grunt-kmc
 
+[![Build Status](https://travis-ci.org/daxingplay/grunt-kmc.png?branch=master)](https://travis-ci.org/daxingplay/grunt-kmc)
+
 > Grunt plugin for KISSY Module Compiler
 
 ## Getting Started
