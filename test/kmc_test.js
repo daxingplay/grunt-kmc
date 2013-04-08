@@ -34,8 +34,8 @@ exports.kmc = {
     index: function (test) {
         test.expect(1);
 
-        var actual = grunt.file.read('test/assets/index.combo.js');
-        var expected = grunt.file.read('test/expected/index.combo.js');
+        var actual = grunt.file.read('test/assets/index.combo.js', 'utf-8');
+        var expected = grunt.file.read('test/expected/index.combo.js', 'utf-8');
         test.equal(actual, expected, 'should build proper combo file.');
 
         test.done();
