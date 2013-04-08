@@ -27,6 +27,7 @@ grunt.initConfig({
   kmc: {
     options: {
       // Task-specific options go here.
+      // for options, please refer to [kmc](https://github.com/daxingplay/ModuleCompiler).
     },
     your_target: {
       // Target-specific file lists and/or options go here.
@@ -37,50 +38,43 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.packages
+Type: `Array`
+Default value: `[]`
+
+KISSY package configuration.
+
+#### options.charset
 Type: `String`
-Default value: `',  '`
+Default value: `utf-8`
 
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+output charset.
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  kmc: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### Simple Example
 
 ```js
 grunt.initConfig({
   kmc: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+        packages: [
+            {
+                name: 'test',
+                path: 'assets/src',
+                charset: 'gbk'
+            }
+        ]
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+    files: [{
+        src: 'assets/src/test/index.js',
+        dest: 'assets/dist/test/index.combo.js'
+    }]
+  }
 })
 ```
+
+For detailed options configuration, please refer [kmc homepage](https://github.com/daxingplay/ModuleCompiler).
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
