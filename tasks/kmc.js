@@ -8,7 +8,7 @@
 
 'use strict';
 
-var kmc = require('module-compiler'),
+var kmc = require('kmc'),
     path = require('path');
 
 module.exports = function (grunt) {
