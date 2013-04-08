@@ -1,6 +1,6 @@
 /**
  * index
- * @author: ×ÏÓ¢£¨daxingplay£©<daxingplay@gmail.com>
+ * @author: daxingplay<daxingplay@gmail.com>
  * @date: 13-4-7
  * @requires: kissy 1.2+
  */

@@ -18,10 +18,7 @@ module.exports = function (grunt) {
 
     grunt.registerMultiTask('kmc', 'Build KISSY modules.', function () {
         // Merge task-specific and/or target-specific options with these defaults.
-        var options = this.options({
-            punctuation: '.',
-            separator: ', '
-        });
+        var options = this.options();
 
         kmc.config(options);
 

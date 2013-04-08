@@ -20,7 +20,7 @@ KISSY.add('assets/mods/mod1',function (S) {
 });
 /**
  * index
- * @author: ��Ӣ��daxingplay��<daxingplay@gmail.com>
+ * @author: daxingplay<daxingplay@gmail.com>
  * @date: 13-4-7
  * @requires: kissy 1.2+
  */
