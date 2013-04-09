@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/daxingplay/grunt-kmc.png?branch=master)](https://travis-ci.org/daxingplay/grunt-kmc)
 
+[![NPM version](https://badge.fury.io/js/grunt-kmc.png)](http://badge.fury.io/js/grunt-kmc)
+
 > Grunt plugin for KISSY Module Compiler
 
 ## Getting Started
