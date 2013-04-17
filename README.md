@@ -61,19 +61,20 @@ output charset.
 ```js
 grunt.initConfig({
   kmc: {
-    options: {
-        packages: [
-            {
-                name: 'test',
-                path: 'assets/src',
-                charset: 'gbk'
-            }
-        ]
-    },
-    files: [{
-        src: 'assets/src/test/index.js',
-        dest: 'assets/dist/test/index.combo.js'
-    }]
+    main:
+        options: {
+            packages: [
+                {
+                    name: 'test',
+                    path: 'assets/src',
+                    charset: 'gbk'
+                }
+            ]
+        },
+        files: [{
+            src: 'assets/src/test/index.js',
+            dest: 'assets/dist/test/index.combo.js'
+        }]
   }
 })
 ```
