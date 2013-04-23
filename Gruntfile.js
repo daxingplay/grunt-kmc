@@ -35,7 +35,8 @@ module.exports = function (grunt) {
                     packages: [{
                         name: 'assets',
                         path: 'test/'
-                    }]
+                    }],
+                    depExt: '.dep'
                 },
                 files: [{
                     src: 'test/assets/index.js',

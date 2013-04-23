@@ -32,6 +32,7 @@ KISSY.add('assets/index',function (S) {
     }
 }, {
     requires: [
+        'dom',
         './mods/mod1'
     ]
 });

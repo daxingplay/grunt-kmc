@@ -30,14 +30,19 @@ exports.kmc = {
     },
     tearDown: function(done){
         grunt.file.delete('test/assets/index.combo.js');
+        grunt.file.delete('test/assets/index.dep.js');
         done();
     },
     index: function (test) {
-        test.expect(1);
+        test.expect(2);
 
         var actual = grunt.file.read('test/assets/index.combo.js', 'utf-8');
-        var expected = grunt.file.read('test/expected/index.combo.js', 'utf-8').replace("\r\n", os.EOL);
+        var expected = grunt.util.normalizelf(grunt.file.read('test/expected/index.combo.js', 'utf-8'));
         test.equal(actual, expected, 'should build proper combo file.');
+
+        var actualDep = grunt.file.read('test/assets/index.dep.js', 'utf-8');
+        var expectedDep = grunt.util.normalizelf(grunt.file.read('test/expected/index.dep.js', 'utf-8'));
+        test.equal(actualDep, expectedDep, 'should have proper dependency file');
 
         test.done();
     }

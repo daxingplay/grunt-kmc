@@ -12,6 +12,7 @@ KISSY.add(function (S) {
     }
 }, {
     requires: [
+        'dom',
         './mods/mod1'
     ]
 });
