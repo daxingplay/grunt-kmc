@@ -26,21 +26,25 @@ module.exports = function (grunt) {
 
         // Iterate over all specified file groups.
         this.files.forEach(function (f) {
-            var depFile = '',
-                inputSrc = path.resolve(String(f.src)),
-                outputSrc = path.resolve(String(f.dest));
-            if(depExt || depFilePath){
-                depExt = depExt || '.dep';
-                if(depFilePath){
-                    depFile = grunt.file.isDir(depFilePath) ? depFilePath = path.resolve(depFilePath, path.basename(outputSrc) + depExt + '.js') : depFilePath;
-                }else{
-                    depFile = path.resolve(path.dirname(outputSrc), path.basename(inputSrc, '.js') + depExt + '.js');
+            f.src.forEach(function(src){
+                var depFile = '',
+                    inputSrc = path.resolve(src),
+                    outputSrc = path.resolve(String(f.dest));
+                if(depExt || depFilePath){
+                    depExt = depExt || '.dep';
+                    var outputIsDir = grunt.file.isDir(outputSrc) || !/\.j$/.test(outputSrc);
+                    if(depFilePath){
+                        depFile = grunt.file.isDir(depFilePath) ? path.resolve(depFilePath, path.basename(outputIsDir ? path.basename(inputSrc, '.js') :outputSrc) + depExt + '.js') : depFilePath;
+                    }else{
+                        var dir = outputIsDir ? outputSrc : path.dirname(outputSrc);
+                        depFile = path.resolve(dir, path.basename(inputSrc, '.js') + depExt + '.js');
+                    }
                 }
-            }
-            kmc.build(inputSrc, outputSrc, '', depFile);
+                var result = kmc.build(inputSrc, outputSrc, '', depFile);
 
-            // Print a success message.
-            grunt.log.writeln('File "' + f.dest + '" created.');
+                // Print a success message.
+                grunt.log.writeln('File "' + result.files[0].outputFile + '" created.');
+            });
         });
     });
 

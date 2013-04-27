@@ -36,11 +36,12 @@ module.exports = function (grunt) {
                         name: 'assets',
                         path: 'test/'
                     }],
-                    depExt: '.dep'
+                    depExt: '.dep',
+                    suffix: '.combo'
                 },
                 files: [{
-                    src: 'test/assets/index.js',
-                    dest: 'test/assets/index.combo.js'
+                    src: 'test/assets/*.js',
+                    dest: 'tmp/assets/'
                 }]
             }
         },
