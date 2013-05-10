@@ -56,6 +56,10 @@ Default value: `utf-8`
 Type: `Boolean`
 Default Value: `false`
 
+#### options.depFileCharset
+Type: `String`
+Default value: `same as options.charset`
+
 output charset.
 
 ### Usage Examples

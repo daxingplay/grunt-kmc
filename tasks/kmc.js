@@ -22,7 +22,7 @@ module.exports = function (grunt) {
             depExt = options.depExt,
             depFilePath = options.depFilePath,
             comboOnly = options.comboOnly,
-            depFileCharset = options.depFileCharset;
+            depFileCharset = options.depFileCharset || options.charset;
 
         kmc.config(options);
 
