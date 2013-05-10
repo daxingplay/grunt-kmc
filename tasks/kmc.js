@@ -21,7 +21,8 @@ module.exports = function (grunt) {
         var options = this.options(),
             depExt = options.depExt,
             depFilePath = options.depFilePath,
-            comboOnly = options.comboOnly;
+            comboOnly = options.comboOnly,
+            depFileCharset = options.depFileCharset;
 
         kmc.config(options);
 
@@ -43,7 +44,7 @@ module.exports = function (grunt) {
                 }
                 var result = '';
                 if(comboOnly === true){
-                    kmc.combo(inputSrc, depFile);
+                    kmc.combo(inputSrc, depFile, depFileCharset);
                     grunt.log.writeln('Dep File "' + depFile + '" created.');
                 }else{
                     result = kmc.build(inputSrc, outputSrc, '', depFile);
