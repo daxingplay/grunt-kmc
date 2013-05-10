@@ -52,6 +52,10 @@ KISSY package configuration.
 Type: `String`
 Default value: `utf-8`
 
+#### options.comboOnly
+Type: `Boolean`
+Default Value: `false`
+
 output charset.
 
 ### Usage Examples

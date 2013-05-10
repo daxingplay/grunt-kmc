@@ -37,11 +37,26 @@ module.exports = function (grunt) {
                         path: 'test/'
                     }],
                     depExt: '.dep',
-                    suffix: '.combo'
+                    suffix: '.combo',
+                    comboOnly: false
                 },
                 files: [{
                     src: 'test/assets/*.js',
                     dest: 'tmp/assets/'
+                }]
+            },
+            combo: {
+                options: {
+                    packages: [{
+                        name: 'assets',
+                        path: 'test/'
+                    }],
+                    depExt: '.dep',
+                    comboOnly: true
+                },
+                files: [{
+                    src: 'test/assets/index.js',
+                    dest: 'tmp/assets/combo/'
                 }]
             }
         },

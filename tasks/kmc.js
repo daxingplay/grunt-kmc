@@ -20,7 +20,8 @@ module.exports = function (grunt) {
         // Merge task-specific and/or target-specific options with these defaults.
         var options = this.options(),
             depExt = options.depExt,
-            depFilePath = options.depFilePath;
+            depFilePath = options.depFilePath,
+            comboOnly = options.comboOnly;
 
         kmc.config(options);
 
@@ -40,10 +41,15 @@ module.exports = function (grunt) {
                         depFile = path.resolve(dir, path.basename(inputSrc, '.js') + depExt + '.js');
                     }
                 }
-                var result = kmc.build(inputSrc, outputSrc, '', depFile);
+                var result = '';
+                if(comboOnly === true){
+                    kmc.combo(inputSrc, depFile);
+                    grunt.log.writeln('Dep File "' + depFile + '" created.');
+                }else{
+                    result = kmc.build(inputSrc, outputSrc, '', depFile);
+                    grunt.log.writeln('File "' + result.files[0].outputFile + '" created.');
+                }
 
-                // Print a success message.
-                grunt.log.writeln('File "' + result.files[0].outputFile + '" created.');
             });
         });
     });
