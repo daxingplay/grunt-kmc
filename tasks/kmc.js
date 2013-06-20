@@ -47,7 +47,7 @@ module.exports = function (grunt) {
                     kmc.combo(inputSrc, depFile, depFileCharset);
                     grunt.log.writeln('Dep File "' + depFile + '" created.');
                 }else{
-                    result = kmc.build(inputSrc, outputSrc, '', depFile);
+                    result = kmc.build(inputSrc, outputSrc, null, depFile);
                     grunt.log.writeln('File "' + result.files[0].outputFile + '" created.');
                 }
 
