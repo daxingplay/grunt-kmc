@@ -56,6 +56,12 @@ Default value: `utf-8`
 Type: `Boolean`
 Default Value: `false`
 
+#### options.depFilePath
+Type: `String`
+Default value: ``
+
+dep file output path
+
 #### options.depFileCharset
 Type: `String`
 Default value: `same as options.charset`
