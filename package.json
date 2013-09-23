@@ -1,7 +1,7 @@
 {
     "name": "grunt-kmc",
     "description": "Grunt plugin for KISSY Module Compiler",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "homepage": "https://github.com/daxingplay/grunt-kmc",
     "author": {
         "name": "daxingplay",
@@ -29,7 +29,7 @@
         "test": "grunt test"
     },
     "dependencies": {
-        "kmc": "~1.0.8"
+        "kmc": ">=1.0.15"
     },
     "devDependencies": {
         "grunt-contrib-jshint": "~0.1.1",

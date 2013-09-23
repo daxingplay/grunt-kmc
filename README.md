@@ -68,6 +68,12 @@ Default value: `same as options.charset`
 
 output charset.
 
+#### options.traverse
+Type: `Boolean`
+Default value: `false`
+
+build all files in src recursively.
+
 ### Usage Examples
 
 #### Simple Example
@@ -100,4 +106,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 0.1.6 add traverse option.
 * 0.1.5 fix charset output bug.
