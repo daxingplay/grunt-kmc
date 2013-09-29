@@ -101,6 +101,33 @@ grunt.initConfig({
 
 For detailed options configuration, please refer [kmc homepage](https://github.com/daxingplay/ModuleCompiler).
 
+#### Another Example
+
+Generator the Module Map File Only
+
+```js
+grunt.initConfig({
+  kmc: {
+    main:
+        options: {
+            packages: [
+                {
+                    name: 'test',
+                    path: 'assets/src',// Can be ignored
+                    charset: 'gbk'
+                }
+            ],
+			depFilePath:'build/mods.js',
+			comboMap:true
+        },
+        files: [{
+            src: 'assets/src/**/*.js',
+            dest: 'assets/dist/'
+        }]
+  }
+});
+```
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
