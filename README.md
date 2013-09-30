@@ -118,6 +118,7 @@ grunt.initConfig({
                 }
             ],
 			depFilePath:'build/mods.js',
+			comboOnly:true,
 			comboMap:true
         },
         files: [{
