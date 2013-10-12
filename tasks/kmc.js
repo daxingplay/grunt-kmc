@@ -59,6 +59,7 @@ module.exports = function (grunt) {
 			// added by jayli
 			var fullMods = {};
 			if(options.comboMap === true){
+				var ap = path.normalize(options.packages[0].path);
 				if(typeof options.packages[0].name == 'undefined'){
 					grunt.log.writeln('packages is not defined!');
 					return;
@@ -72,8 +73,8 @@ module.exports = function (grunt) {
 				f.src.forEach(function(src){
 					kmc.clean();
 					var a = kmc.analyze(path.resolve(src));
-					fullMods[pkg + '/' + a.name] = a.requires || [];
-					
+					var p = pkg + a.path.replace(ap,'').replace(/\.js$/,'');
+					fullMods[p] = a.requires || [];
 				});
 				var mods = JSON.stringify(fullMods);
 				var res = '';

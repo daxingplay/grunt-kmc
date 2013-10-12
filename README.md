@@ -74,6 +74,13 @@ Default value: `false`
 
 build all files in src recursively.
 
+#### options.comboMap
+
+Type:`Boolean`
+Default value:`false`
+
+generator one map file
+
 ### Usage Examples
 
 #### Simple Example
@@ -113,12 +120,11 @@ grunt.initConfig({
             packages: [
                 {
                     name: 'test',
-                    path: 'assets/src',// Can be ignored
+                    path: 'assets/src',
                     charset: 'gbk'
                 }
             ],
 			depFilePath:'build/mods.js',
-			comboOnly:true,
 			comboMap:true
         },
         files: [{
@@ -134,5 +140,6 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+* 0.1.7 bugfix for comboMap
 * 0.1.6 add traverse option.
 * 0.1.5 fix charset output bug.
