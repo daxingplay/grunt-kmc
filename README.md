@@ -74,6 +74,13 @@ Default value: `false`
 
 build all files in src recursively.
 
+#### options.fixModuleName
+
+Type:`Boolean`
+Default value:`false`
+
+When combo, module name should be fixed. I suggest you to set this option to true when you combo only.
+
 #### options.comboMap
 
 Type:`Boolean`
