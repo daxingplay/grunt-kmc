@@ -71,7 +71,6 @@ module.exports = function (grunt) {
                             var requires = [];
                             if(mod && mod.dependencies && mod.dependencies.length){
                                 mod.dependencies.forEach(function(subMod){
-                                    console.log('sub mod name is : ' + subMod.name);
                                     requires.push("'" + subMod.name + "'");
                                 });
                                 content.push("'" + modName + "': { requires: [" + requires.join(', ') + "]}");
@@ -85,7 +84,7 @@ module.exports = function (grunt) {
             if(content.length){
                 r += "KISSY.config('modules', {" + os.EOL + " " + content.join("," + os.EOL + " ") + " " + os.EOL + "});";
             }
-            fs.writeFileSync(path.resolve(options.depFilePath), r, {'encoding':'utf8'});
+            grunt.file.write(options.depFilePath, r, {'encoding':'utf8'});
         }
     });
 
