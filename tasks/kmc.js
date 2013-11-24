@@ -49,12 +49,12 @@ module.exports = function (grunt) {
                 }
                 var result = '';
                 if(comboOnly === true){
-                    results.push(kmc.combo(inputSrc, depFile, depFileCharset, fixModuleName, true));
-                    grunt.log.writeln('Dep File "' + depFile + '" created.');
+                    results.push(kmc.combo(inputSrc, options.comboMap !== true ? depFile : undefined, depFileCharset, fixModuleName, true));
+                    options.comboMap !== true && grunt.log.ok('Dep File "' + depFile + '" created.');
                 }else{
                     result = kmc.build(inputSrc, outputSrc, null, depFile, traverse);
                     results.push(result);
-                    grunt.log.writeln('File "' + result.files[0].outputFile + '" created.');
+                    grunt.log.ok('File "' + result.files[0].outputFile + '" created.');
                 }
 
             });
@@ -85,6 +85,7 @@ module.exports = function (grunt) {
                 r += "KISSY.config('modules', {" + os.EOL + " " + content.join("," + os.EOL + " ") + " " + os.EOL + "});";
             }
             grunt.file.write(options.depFilePath, r, {'encoding':'utf8'});
+            grunt.log.ok('combined dependency file ' + options.depFilePath + ' created.');
         }
     });
 
