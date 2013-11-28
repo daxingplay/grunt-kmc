@@ -41,7 +41,11 @@ module.exports = function (grunt) {
                     depExt = depExt || '.dep';
                     var outputIsDir = grunt.file.isDir(outputSrc) || !/\.js$/.test(outputSrc);
                     if(depFilePath){
-                        depFile = grunt.file.isDir(depFilePath) ? path.resolve(depFilePath, path.basename(outputIsDir ? path.basename(inputSrc, '.js') :outputSrc) + depExt + '.js') : depFilePath;
+                        if(grunt.file.isDir(depFilePath) || !/.js$/.test(depFilePath)){
+                            depFile = path.resolve(depFilePath, path.basename(outputIsDir ? path.basename(inputSrc, '.js') :outputSrc) + depExt + '.js');
+                        }else{
+                            depFile = depFilePath;
+                        }
                     }else{
                         var dir = outputIsDir ? outputSrc : path.dirname(outputSrc);
                         depFile = path.resolve(dir, path.basename(inputSrc, '.js') + depExt + '.js');
@@ -49,7 +53,7 @@ module.exports = function (grunt) {
                 }
                 var result = '';
                 if(comboOnly === true){
-                    results.push(kmc.combo(inputSrc, options.comboMap !== true ? depFile : undefined, depFileCharset, fixModuleName, true, outputSrc));
+                    results.push(kmc.combo(inputSrc, options.comboMap !== true ? depFile : undefined, depFileCharset, fixModuleName, true, grunt.file.isDir(outputSrc) ? outputSrc : path.dirname(outputSrc)));
                     options.comboMap !== true && grunt.log.ok('Dep File "' + depFile + '" created.');
                 }else{
                     result = kmc.build(inputSrc, outputSrc, null, depFile, traverse);
