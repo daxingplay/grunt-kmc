@@ -325,6 +325,7 @@ a.js
 
 ## Changelog
 
+* 0.1.15 bugfix for comboOnly & comboMap
 * 0.1.7 bugfix for comboMap
 * 0.1.6 add traverse option.
 * 0.1.5 fix charset output bug.
