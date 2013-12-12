@@ -4,148 +4,324 @@
 
 [![NPM version](https://badge.fury.io/js/grunt-kmc.png)](http://badge.fury.io/js/grunt-kmc)
 
-> Grunt plugin for KISSY Module Compiler
+> [KISSY Module Compiler](https://github.com/daxingplay/kmc)的Grunt插件版本。
 
-## Getting Started
-This plugin requires Grunt `~0.4.1`
+## 项目说明
 
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
+依赖`Grunt ~0.4.1`，请首先安装Grunt，参照[Grunt安装手册](http://gruntjs.com/getting-started)和[Gruntfile样例](http://gruntjs.com/sample-gruntfile)。之后，敲入命令来安装`grunt-kmc`:
 
 ```shell
 npm install grunt-kmc --save-dev
 ```
 
-One the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+然后，确保你的`gruntfile.js`中载入了这个模块
 
 ```js
 grunt.loadNpmTasks('grunt-kmc');
 ```
 
-## The "kmc" task
+## 视频示例
 
-### Overview
-In your project's Gruntfile, add a section named `kmc` to the data object passed into `grunt.initConfig()`.
+- 生成依赖关系表：<http://asciinema.org/a/6731>
+- 仅作静态合并：<http://asciinema.org/a/6732>
+
+## Gruntfile.js 里的 KMC 任务
+
+### 介绍
+
+在Gruntfile.js文件中，添加名为`kmc`的任务，代码块写在`grunt.initConfig()`函数参数对象中
 
 ```js
 grunt.initConfig({
-  kmc: {
-    options: {
-      // Task-specific options go here.
-      // for options, please refer to [kmc](https://github.com/daxingplay/ModuleCompiler).
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
+	kmc: {
+		options: {
+			depFilePath: 'build/mods.js',
+			comboOnly: true,
+			fixModuleName:true,
+			comboMap: true,
+			packages: [
+				{
+					name: 'package-name',
+					path: './src/',
+					charset:'utf-8',
+					ignorePackageNameInUri:true
+
+				}
+			],
+		},
+		main: {
+			files: [
+				{
+					expand: true,
+					cwd: 'src/',
+					src: [ '**/*' ],
+					dest: 'build/'
+				}
+			]
+		}
+	},
 })
 ```
 
-### Options
+### 配置项
 
 #### options.packages
-Type: `Array`
-Default value: `[]`
 
-KISSY package configuration.
+- 类型: `Array`
+- 默认值: `[]`
+
+KISSY 包配置项，比如：
+
+	packages: [
+		{
+			name: 'package-name',
+			path: './src/',
+			charset:'utf-8',
+			ignorePackageNameInUri:true
+
+		}
+	],
 
 #### options.charset
-Type: `String`
-Default value: `utf-8`
+
+- 类型: `String`
+- 默认值: `utf-8`
+
+输入文件的编码
 
 #### options.comboOnly
-Type: `Boolean`
-Default Value: `false`
+
+- 类型: `Boolean`
+- 默认值: `false`
+
+设置为`true`时，将不进行文件静态合并，比如两个文件`a.js`和`b.js`：
+
+a.js
+
+	// a.js
+	KISSY.add(function(S){
+		// a
+	},{
+		requires:['./b']
+	});
+
+b.js
+
+	// b.js
+	KISSY.add(function(S){
+		// b
+	});
+
+在`comboOnly`为`false`时将静态合并，比如`a.js`将生成为：
+
+a.js
+
+	// b.js
+	KISSY.add('pkg/b',function(S){
+		// b
+	});
+	// a.js
+	KISSY.add('pkg/a',function(S){
+		// a
+	},{
+		requires:['./b']
+	});
+
+即所有的依赖也都合并到一个文件中。
 
 #### options.depFilePath
-Type: `String`
-Default value: ``
 
-dep file output path
+- 类型: `String`
+- 默认值: ``
+
+生成依赖关系表的文件（输出）位置
 
 #### options.depFileCharset
-Type: `String`
-Default value: `same as options.charset`
 
-output charset.
+- 类型: `String`
+- 默认值: 和`options.charset`保持一样
+
+依赖关系表文件的编码类型
 
 #### options.traverse
-Type: `Boolean`
-Default value: `false`
 
-build all files in src recursively.
+- 类型：`Boolean`
+- 默认值：`false`
+
+当指定模个文件为入口文件时，遍历子目录进行构建
 
 #### options.fixModuleName
 
-Type:`Boolean`
-Default value:`false`
+- 类型:`Boolean`
+- 默认值:`false`
 
-When combo, module name should be fixed. I suggest you to set this option to true when you combo only.
+置为`true`时，会给所有文件补全模块名，建议当`comboOnly`为`true`时，总是设置此项为`true`
 
 #### options.comboMap
 
-Type:`Boolean`
-Default value:`false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-generator one map file
+当指定一批文件为源文件时，对这些文件只生成模块依赖关系表，存放于`options.depFilePath`中
 
-### Usage Examples
+----------------------------------
 
-#### Simple Example
+### 用法
 
-```js
-grunt.initConfig({
-  kmc: {
-    main:
-        options: {
-            packages: [
-                {
-                    name: 'test',
-                    path: 'assets/src',
-                    charset: 'gbk'
-                }
-            ]
-        },
-        files: [{
-            src: 'assets/src/test/index.js',
-            dest: 'assets/dist/test/index.combo.js'
-        }]
-  }
-})
-```
+### 示例1，单文件静态合并
 
-For detailed options configuration, please refer [kmc homepage](https://github.com/daxingplay/ModuleCompiler).
+入口为单个文件，将这个文件的依赖关系解析好后合并入另一个文件
 
-#### Another Example
+	grunt.initConfig({
+		kmc: {
+			main:{
+				options: {
+					packages: [
+						{
+							name: 'test',
+							path: 'assets/src',
+							charset: 'utf-8'
+						}
+					]
+				},
+				files: [{
+					// 入口和出口均为单文件
+					src: 'assets/src/test/index.js',
+					dest: 'assets/dist/test/index.combo.js'
+				}]
+			}
+		}
+	});
 
-Generator the Module Map File Only
+详细配置项请参照[kmc首页](https://github.com/daxingplay/kmc)。
 
-```js
-grunt.initConfig({
-  kmc: {
-    main:
-        options: {
-            packages: [
-                {
-                    name: 'test',
-                    path: 'assets/src',
-                    charset: 'gbk'
-                }
-            ],
+如果输出`gbk`编码的文件，需要配置全局项
+
+	kmc: {
+		options: {
+			charset:'gbk',
+			packages: [
+				{
+					name: 'pkg-name',
+					path: '../',
+					charset:'gbk',
+					ignorePackageNameInUri:true
+				}
+			]
+		},
+	//...
+	grunt.file.defaultEncoding = 'gbk';
+
+### 示例2，批量静态合并文件
+
+入口为一批文件，每个文件都解析合并
+
+	grunt.initConfig({
+        kmc: {
+            options: {
+                packages: [
+                    {
+                        name: 'pkg-name',
+                        path: '../',
+						charset:'utf-8',
+						ignorePackageNameInUri:true
+
+                    }
+                ],
+				// 将 ModuleName 中的 `src` 去掉
+				map: [['pkg-name/src/', 'pkg-name/']]
+            },
+
+            main: {
+                files: [
+                    {
+						// 这里指定项目根目录下所有文件为入口文件
+                        expand: true,
+						cwd: 'src/',
+                        src: [ '**/*.js', '!Gruntfile.js'],
+                        dest: 'build/'
+                    }
+                ]
+            }
+		}
+	});
+
+
+### 示例3，批量静态合并，报名为变量
+
+入口为一批文件，每个文件都解析合并，包名从配置文件中读取
+
+	grunt.initConfig({
+		// 读取`abc.json配置文件中的配置`
+        pkg: grunt.file.readJSON('abc.json'),
+        kmc: {
+            options: {
+                packages: [
+                    {
+                        name: '<%= pkg.name %>',
+                        path: '../',
+						charset:'utf-8'
+                    }
+                ],
+				// 将 ModuleName 中的 `src` 去掉
+				map: [['<%= pkg.name %>/src/', '<%= pkg.name %>/']]
+            },
+
+            main: {
+                files: [
+                    {
+						// 这里指定项目根目录下所有文件为入口文件
+                        expand: true,
+						cwd: 'src/',
+                        src: [ '**/*.js', '!Gruntfile.js'],
+                        dest: 'build/'
+                    }
+                ]
+            }
+		}
+	});
+
+其中 abc.json 文件内容如下：
+
+	{
+		"name": "my-custom-package-name",
+	}
+
+### 示例4，针对一批文件生成依赖关系表
+
+生成模块依赖关系表，同时源文件也被添加好模块名存放到目标目录
+
+	grunt.initConfig({
+		options: {
+			packages: [
+				{
+					name: 'h5-test',
+					path: './src/', //指定package起始路径
+					charset:'utf-8',
+					ignorePackageNameInUri:true
+				}
+			],
+			// 生成模块依赖关系表
 			depFilePath:'build/mods.js',
+			comboOnly:true,// 不要静态合并
+			fixModuleName:true,// 补全模块名称
 			comboMap:true
-        },
-        files: [{
-            src: 'assets/src/**/*.js',
-            dest: 'assets/dist/'
-        }]
-  }
-});
-```
+		},
+		main: {
+			files: [
+				{
+					src: 'src/**/*.js',
+					dest: 'build/'
+				}
+			]
+		}
+	});
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+## 更多应用案例
 
-## Release History
+[Clam](http://github.com/jayli/generator-clam)工具和[ABC](http://abc.f2e.taobao.net/)依赖kmc。
+
+## Changelog
 
 * 0.1.7 bugfix for comboMap
 * 0.1.6 add traverse option.

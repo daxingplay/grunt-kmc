@@ -53,7 +53,8 @@ module.exports = function (grunt) {
                 }
                 var result = '';
                 if(comboOnly === true){
-                    results.push(kmc.combo(inputSrc, options.comboMap !== true ? depFile : undefined, depFileCharset, fixModuleName, true, grunt.file.isDir(outputSrc) ? outputSrc : path.dirname(outputSrc)));
+					var r = kmc.combo(inputSrc, options.comboMap !== true ? depFile : undefined, depFileCharset, fixModuleName, true, grunt.file.isDir(outputSrc) ? outputSrc : path.dirname(outputSrc),comboOnly === true);
+					results.push(r);
                     options.comboMap !== true && grunt.log.ok('Dep File "' + depFile + '" created.');
                 }else{
                     result = kmc.build(inputSrc, outputSrc, null, depFile, traverse);
