@@ -180,7 +180,8 @@ a.js
 						{
 							name: 'test',
 							path: 'assets/src',
-							charset: 'utf-8'
+							charset: 'utf-8',
+							ignorePackageNameInUri:true
 						}
 					]
 				},
@@ -247,7 +248,7 @@ a.js
 	});
 
 
-### 示例3，批量静态合并，报名为变量
+### 示例3，批量静态合并，包名为变量
 
 入口为一批文件，每个文件都解析合并，包名从配置文件中读取
 
@@ -260,7 +261,8 @@ a.js
                     {
                         name: '<%= pkg.name %>',
                         path: '../',
-						charset:'utf-8'
+						charset:'utf-8',
+						ignorePackageNameInUri:true
                     }
                 ],
 				// 将 ModuleName 中的 `src` 去掉
