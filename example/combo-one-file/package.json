@@ -1,0 +1,29 @@
+{
+    "name": "h5-tt",
+    "version": "0.0.1",
+    "description": "a clam project",
+    "author": {
+        "name": "虎牙",
+        "email": "huya.nzb@alibaba-inc.com"
+    },
+	"repository": {
+        "type": "git",
+        "url": ""
+    },
+    "keywords": [
+        "clam", "H5Tt"
+    ],
+
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-copy": "",
+        "grunt-contrib-uglify": "~0.2.0",
+        "grunt-contrib-clean": "~0.4.0",
+        "grunt-contrib-cssmin": "~0.5.0",
+        "grunt-kmc": "",
+		"grunt-replace":""
+    },
+
+    "dependencies": {
+    }
+}
