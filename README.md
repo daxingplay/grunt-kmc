@@ -25,103 +25,10 @@ grunt.loadNpmTasks('grunt-kmc');
 - 生成依赖关系表：<http://asciinema.org/a/6731>
 - 仅作静态合并：<http://asciinema.org/a/6732>
 
-## 构建规则
-
-基于 [KISSY](http://docs.kissyui.com/) 的项目代码只要符合 [KMD](http://docs.kissyui.com/1.4/docs/html/guideline/kmd.html) 规范，在源码发布上线之前，要做至少两件事
+构建规则说明：基于 [KISSY](http://docs.kissyui.com/) 的项目代码只要符合 [KMD](http://docs.kissyui.com/1.4/docs/html/guideline/kmd.html) 规范，在源码发布上线之前，要做至少两件事
 
 1. 线上模块代码必须带有模块名配置
 1. 静态合并或者生成依赖关系的Map
-
-### Example1
-
-如果静态合并：其中`mods`中的文件被`index.js`和`list.js`所依赖，[Example](https://github.com/daxingplay/grunt-kmc/tree/master/example/combo-one-file)
-
-<table>
-    <thead>
-        <tr>
-            <th>Before</th>
-            <th>After</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-<pre>
-./src
-├── mods
-│   ├── a.js
-│   ├── b.js
-│   ├── c.js
-│   └── d.js
-└── pages
-    └── home
-        ├── index.js
-        └── list.js
-</pre>
-            </td>
-            <td>
-<pre>
-sample/build
-└── pages
-    └── home
-        ├── index.js
-        └── list.js
-</pre>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-
-### Example2
-
-生成Map：[Example](https://github.com/daxingplay/grunt-kmc/tree/master/example/generate-map-file)
-
-<table>
-    <thead>
-        <tr>
-            <th>Before</th>
-            <th>After</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-<pre>
-./src
-├── mods
-│   ├── a.js
-│   ├── b.js
-│   ├── c.js
-│   └── d.js
-└── pages
-    └── home
-        ├── index.js
-        └── list.js
-</pre>
-            </td>
-            <td>
-<pre>
-./build
-├── mods
-│   ├── a.js
-│   ├── b.js
-│   ├── c.js
-│   └── d.js
-├── map.js
-└── pages
-    └── home
-        ├── index.js
-        └── list.js
-</pre>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-### Example3
-
-仅补全模块名：[Example](https://github.com/daxingplay/grunt-kmc/tree/master/example/fix-module-only)
 
 ## Gruntfile.js 里的 KMC 任务
 
@@ -264,9 +171,104 @@ a.js
 
 ----------------------------------
 
-### 用法
+## 用法
 
-### 示例1，单文件静态合并
+#### Example1
+
+如果静态合并：其中`mods`中的文件被`index.js`和`list.js`所依赖，[Example](https://github.com/daxingplay/grunt-kmc/tree/master/example/combo-one-file)
+
+<table>
+    <thead>
+        <tr>
+            <th>Before</th>
+            <th>After</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+<pre>
+./src
+├── mods
+│   ├── a.js
+│   ├── b.js
+│   ├── c.js
+│   └── d.js
+└── pages
+    └── home
+        ├── index.js
+        └── list.js
+</pre>
+            </td>
+            <td>
+<pre>
+sample/build
+└── pages
+    └── home
+        ├── index.js
+        └── list.js
+</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+#### Example2
+
+生成Map：[Example](https://github.com/daxingplay/grunt-kmc/tree/master/example/generate-map-file)
+
+<table>
+    <thead>
+        <tr>
+            <th>Before</th>
+            <th>After</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+<pre>
+./src
+├── mods
+│   ├── a.js
+│   ├── b.js
+│   ├── c.js
+│   └── d.js
+└── pages
+    └── home
+        ├── index.js
+        └── list.js
+</pre>
+            </td>
+            <td>
+<pre>
+./build
+├── mods
+│   ├── a.js
+│   ├── b.js
+│   ├── c.js
+│   └── d.js
+├── map.js
+└── pages
+    └── home
+        ├── index.js
+        └── list.js
+</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+#### Example3
+
+仅补全模块名：[Example](https://github.com/daxingplay/grunt-kmc/tree/master/example/fix-module-only)
+
+-------------------------------------------
+
+### 更多配置写法参考
+
+#### 示例1，单文件静态合并
 
 入口为单个文件，将这个文件的依赖关系解析好后合并入另一个文件
 
@@ -311,7 +313,7 @@ a.js
 	//...
 	grunt.file.defaultEncoding = 'gbk';
 
-### 示例2，批量静态合并文件
+#### 示例2，批量静态合并文件
 
 入口为一批文件，每个文件都解析合并
 
@@ -346,7 +348,7 @@ a.js
 	});
 
 
-### 示例3，批量静态合并，包名为变量
+#### 示例3，批量静态合并，包名为变量
 
 入口为一批文件，每个文件都解析合并，包名从配置文件中读取
 
@@ -387,7 +389,7 @@ a.js
 		"name": "my-custom-package-name",
 	}
 
-### 示例4，针对一批文件生成依赖关系表
+#### 示例4，针对一批文件生成依赖关系表
 
 生成模块依赖关系表，同时源文件也被添加好模块名存放到目标目录
 
@@ -417,9 +419,11 @@ a.js
 		}
 	});
 
-## 更多应用案例
+### 更多应用案例
 
 [Clam](http://github.com/jayli/generator-clam)工具和[ABC](http://abc.f2e.taobao.net/)依赖kmc。
+
+---------------------------------------
 
 ## Q & A
 
@@ -437,6 +441,7 @@ a.js
 
 原因是`header/index.js`文件不存在。
 
+-------------------------------------------
 ## Changelog
 
 * 0.1.15 bugfix for comboOnly & comboMap
