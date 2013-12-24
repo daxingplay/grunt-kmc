@@ -25,7 +25,7 @@ module.exports = function (grunt) {
             depFilePath = options.depFilePath,
             comboOnly = options.comboOnly,
             depFileCharset = options.depFileCharset || options.charset,
-            fixModuleName = options.fixModuleName !== false,
+            fixModuleName = options.fixModuleName === true,
             fixModuleNameOnDest = options.fixModuleNameOnDest === true,
             traverse = options.traverse;
 
