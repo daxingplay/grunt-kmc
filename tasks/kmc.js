@@ -26,6 +26,7 @@ module.exports = function (grunt) {
             comboOnly = options.comboOnly,
             depFileCharset = options.depFileCharset || options.charset,
             fixModuleName = options.fixModuleName !== false,
+            fixModuleNameOnDest = options.fixModuleNameOnDest === true,
             traverse = options.traverse;
 
         kmc.config(options);
@@ -53,7 +54,8 @@ module.exports = function (grunt) {
                 }
                 var result = '';
                 if(comboOnly === true){
-					var r = kmc.combo(inputSrc, options.comboMap !== true ? depFile : undefined, depFileCharset, fixModuleName, true, grunt.file.isDir(outputSrc) ? outputSrc : path.dirname(outputSrc),comboOnly === true);
+                    var outputDir = grunt.file.isDir(outputSrc) ? outputSrc : path.dirname(outputSrc);
+					var r = kmc.combo(inputSrc, options.comboMap !== true ? depFile : undefined, depFileCharset, fixModuleName, true, fixModuleNameOnDest ? outputDir : null,comboOnly === true);
 					results.push(r);
                     options.comboMap !== true && grunt.log.ok('Dep File "' + depFile + '" created.');
                 }else{
