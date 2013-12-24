@@ -70,7 +70,7 @@ grunt.initConfig({
 - 类型: `Array`
 - 默认值: `[]`
 
-KISSY 包配置项，比如：
+KISSY 包配置项，可以使用KISSY 1.2的数组方式，也可以使用KISSY 1.3+的对象方式。配置项的含义和KISSY的包配置规则完全一致，具体可参考[KISSY loader的文档](http://docs.kissyui.com/1.4/docs/html/api/loader/config.html)。比如：
 
 	packages: [
 		{
@@ -78,9 +78,18 @@ KISSY 包配置项，比如：
 			path: './src/',
 			charset:'utf-8',
 			ignorePackageNameInUri:true
-
 		}
-	],
+	]
+
+或者（推荐）
+
+	packages: {
+		'package-name': {
+			base: './src/',
+			charset:'utf-8',
+			ignorePackageNameInUri:true
+		}
+	}
 
 #### options.charset
 
@@ -156,6 +165,7 @@ a.js
 - 默认值:`false`
 
 置为`true`时，会给所有文件补全模块名，建议当`comboOnly`为`true`时，总是设置此项为`true`
+重要：fixModuleName会在指定的src上进行补全模块名，所以如果您需要使用combo模式并且需要补全模块名，请先用grunt-contrib-copy将您的src文件拷贝到dest，然后再对dest执行kmc任务。
 
 #### options.comboMap
 
