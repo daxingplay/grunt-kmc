@@ -179,6 +179,14 @@ a.js
 
 当指定一批文件为源文件时，对这些文件只生成模块依赖关系表，存放于`options.depFilePath`中
 
+### options.copyAssets
+
+- 类型：`Boolean`
+- 默认值：`false`
+
+需要和fixModuleName搭配使用。
+选项为true的时候，kmc会把src的文件拷贝到dest后再添加模块名。为false的时候，会直接在用户配置的src中的文件添加模块名。我们建议您如果有fixModuleName的需求的时候，先使用grunt-contrib-copy任务把src拷贝到dest，再执行grunt-kmc任务
+
 ----------------------------------
 
 ## 用法

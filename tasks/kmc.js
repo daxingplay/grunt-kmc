@@ -26,7 +26,7 @@ module.exports = function (grunt) {
             comboOnly = options.comboOnly,
             depFileCharset = options.depFileCharset || options.charset,
             fixModuleName = options.fixModuleName === true,
-            fixModuleNameOnDest = options.fixModuleNameOnDest === true,
+            fixModuleNameOnDest = options.copyAssets === true,
             traverse = options.traverse;
 
         kmc.config(options);
