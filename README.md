@@ -6,6 +6,10 @@
 
 > [KISSY Module Compiler](https://github.com/daxingplay/kmc)的Grunt插件版本。
 
+KISSY Module Compiler（kmc）是一个基于NodeJS的KISSY模块打包工具，目前适用于KISSY 1.2+的代码打包
+
+如果您有任何问题，请提issue，或者邮件，或者来往（daxingplay）上联系我，阿里巴巴厂内用户还可以联系紫英。
+
 ## 项目说明
 
 依赖`Grunt ~0.4.1`，请首先安装Grunt，参照[Grunt安装手册](http://gruntjs.com/getting-started)和[Gruntfile样例](http://gruntjs.com/sample-gruntfile)。之后，敲入命令来安装`grunt-kmc`:
