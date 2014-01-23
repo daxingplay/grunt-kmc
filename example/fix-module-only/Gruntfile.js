@@ -26,7 +26,7 @@ module.exports = function (grunt) {
                 // depFilePath: 'build/map.js',
                 comboOnly: true,
                 fixModuleName:true,
-                comboMap: true,
+                comboMap: false,
                 packages: [
                     {
                         name: 'xcake',
