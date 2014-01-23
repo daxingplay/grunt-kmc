@@ -26,11 +26,11 @@ module.exports = function (grunt) {
                 // depFilePath: 'build/map.js',
                 comboOnly: true,
                 fixModuleName:true,
-                comboMap: false,
+                comboMap: true,
                 packages: [
                     {
                         name: 'xcake',
-                        path: './src/',
+                        path: './build/',
 						charset:'utf-8',
 						ignorePackageNameInUri:true
                     }
@@ -40,21 +40,32 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-						cwd: 'src/',
+						cwd: 'build/',
 						// 仅合并这两个文件
-                        src: [ '**/*.js'],
+                        src: [ '**/*.js','!map.js'],
                         dest: 'build/'
                     }
                 ]
             }
-        }
+        },
+        copy: {
+            main: {
+                files: [
+                    {
+                        expand:true,
+                        cwd:'src/',
+                        src: ['**/*.js'], dest: 'build/'}
+                ]
+            }
+        },
+
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-kmc');
-
+    grunt.loadNpmTasks('grunt-contrib-copy');
 	return grunt.registerTask('default', '默认流程', function(type) {
-		task.run(['clean:build', 'kmc']);
+		task.run(['clean:build','copy', 'kmc']);
 	});
 
 };
