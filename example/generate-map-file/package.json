@@ -16,6 +16,7 @@
 
     "devDependencies": {
         "grunt": "~0.4.1",
+        "grunt-contrib-copy": "",
         "grunt-contrib-clean": "~0.4.0",
         "grunt-kmc": "~0.1.15",
 		"grunt-replace":""
