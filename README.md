@@ -147,6 +147,15 @@ a.js
 
 即所有的依赖也都合并到一个文件中。
 
+#### options.cleanUp
+
+- 类型: `Boolean`
+- 默认值: `false`
+
+当`comboOnly`为`false`（静态合并）时，是否将没有指定合并的文件都删除，以减少构建后无用文件数量，`cleanUp` 为 `true` 时清除，为false时不清除
+
+当`comboOnly`为`true`时此配置项不起作用
+
 #### options.depFilePath
 
 - 类型: `String`
