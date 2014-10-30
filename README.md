@@ -452,7 +452,7 @@ sample/build
 
 ### 更多应用案例
 
-[Clam](http://github.com/jayli/generator-clam)工具和[ABC](http://abc.f2e.taobao.net/)依赖kmc。
+[Clam](http://github.com/jayli/generator-clam)工具和阿里内部工具ABC依赖kmc。
 
 ---------------------------------------
 
