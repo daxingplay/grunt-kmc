@@ -207,6 +207,8 @@ function kmcCssParser(astMods,combinedFiles,retainFiles){
 		var mod = {};// 得到当前mod
 		var subCssMods = {}; // 得到当前mod下辖的css文件
 		var hasCss = false; // flag
+		var combinedFileContent = '';//合并后的css文件内容
+		var pickOneCss = '';// 要合并的cssfile地址
 		for(var i in astMods){
 			if(getTempModuleName(i) === modName){
 				mod = astMods[i];
@@ -218,7 +220,7 @@ function kmcCssParser(astMods,combinedFiles,retainFiles){
 		}
 		for(var j in mod.modules){
 			if(/\.css$/i.test(j)){
-				subCssMods[j] = getTempModuleName(j);
+				subCssMods[j] = getCssFullPath(mod,j); 
 				hasCss = true;
 			}
 		}
@@ -226,10 +228,15 @@ function kmcCssParser(astMods,combinedFiles,retainFiles){
 			return true;
 		}
 		console.log('---------------------'.red);
-		console.log(item);
-		console.log(subCssMods);
+		for(var f in subCssMods){
+			pickOneCss = subCssMods[f];
+			combinedFileContent += fs.readFileSync(subCssMods[f],{
+				encoding:'utf8'	
+			});
+		}
+		kmcCss(pickOneCss,combinedFileContent,item);
+		// console.log(mod);
 	});
-
 
 }
 
@@ -244,4 +251,17 @@ function getTempModuleName(str){
 		return false;
 	}
 	return modName;
+}
+
+function getCssFullPath(mod,k){
+	return mod.modules[k].path;
+}
+
+// 将cssFile之外的css引用从combinedJsFile中删除
+// cssFile写入content的内容
+function kmcCss(cssFile,cssContent,combinedJSFile){
+	console.log(combinedJSFile);
+	var jsContent = fs.readFileSync(combinedJSFile,{encoding:'utf8'});
+	// TODO:把jsContent里的requires里的对css的引用删除只剩下一个
+
 }
