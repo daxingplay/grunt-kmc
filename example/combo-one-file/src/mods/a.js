@@ -1,7 +1,10 @@
 // a.js
-KISSY.add(function (S) {
+KISSY.add(function (S,require,exports,module) {
 	S.log('a');
-	return {};
-}, {
-	requires: ['base','node','./b']
+
+	var B = require('./b');
+
+	module.exports = {
+		ok:B
+	};
 });

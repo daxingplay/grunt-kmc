@@ -24,11 +24,11 @@ KISSY.add('xcake/mods/d',function (S) {
 });
 
 // b.js
-KISSY.add('xcake/mods/b',function (S) {
+KISSY.add('xcake/mods/b',['./c', './d'], function (S,require,exports,module) {
 	S.log('b');
-	return {};
-}, {
-	requires: ['base','node','./c','./d']
+	var C = require('./c');
+	var D = require('./d');
+	return 'b';
 });
 
 // list.js
