@@ -25,54 +25,33 @@ KISSY.add('xcake/mods/d',function (S) {
 });
 
 // b.js
-KISSY.add('xcake/mods/b',function (S) {
+KISSY.add('xcake/mods/b',['./c', './d'], function (S,require,exports,module) {
 	S.log('b');
-	return {};
-}, {
-	requires: ['base','node','./c','./d']
+	var C = require('./c');
+	var D = require('./d');
+	return 'b';
 });
 
 // a.js
-KISSY.add('xcake/mods/a',function (S) {
+KISSY.add('xcake/mods/a',['./b'], function (S,require,exports,module) {
 	S.log('a');
-	return {};
-}, {
-	requires: ['base','node','./b']
+
+	var B = require('./b');
+
+	module.exports = {
+		ok:B
+	};
 });
 
 // index.js
-KISSY.add('xcake/pages/home/index',function (S) {
+KISSY.add('xcake/pages/home/index',['../../mods/a'], function (S,require,exports,module) {
 	"use strict";
-	function X(id,cfg) {
-		if (this instanceof X) {
-			this.con = S.one(id);
-			X.superclass.constructor.call(this, cfg);
-			this.init();
-
-		} else {
-			return new X(id,cfg);
-		}
-	}
-
-	// ATTR Example
-	X.ATTRS = {
-		a: {
-			setter: function(){},
-			getter: function(){},
-			value: 1
+	var A = require('../../mods/a');
+	var $ = S.all;
+	module.exports = {
+		init:function(){
+			$('<p>' + A.ok + '</p>').appendTo(document.body);
 		}
 	};
-
-	S.extend(X, S.Base, {
-		init: function() {
-			// your code here
-		},
-		destory: function(){
-		}
-	});
-
-	return X;
-}, {
-	requires: ['base','node','../../mods/a']
 });
 

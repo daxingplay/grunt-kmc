@@ -1,35 +1,11 @@
 // index.js
-KISSY.add(function (S) {
+KISSY.add(function (S,require,exports,module) {
 	"use strict";
-	function X(id,cfg) {
-		if (this instanceof X) {
-			this.con = S.one(id);
-			X.superclass.constructor.call(this, cfg);
-			this.init();
-
-		} else {
-			return new X(id,cfg);
-		}
-	}
-
-	// ATTR Example
-	X.ATTRS = {
-		a: {
-			setter: function(){},
-			getter: function(){},
-			value: 1
+	var A = require('../../mods/a');
+	var $ = S.all;
+	module.exports = {
+		init:function(){
+			$('<p>' + A.ok + '</p>').appendTo(document.body);
 		}
 	};
-
-	S.extend(X, S.Base, {
-		init: function() {
-			// your code here
-		},
-		destory: function(){
-		}
-	});
-
-	return X;
-}, {
-	requires: ['base','node','../../mods/a']
 });
